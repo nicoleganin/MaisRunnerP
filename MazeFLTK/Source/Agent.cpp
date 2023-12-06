@@ -6,7 +6,7 @@
 //
 
 #include "../Header/Agent.hpp"
-#include "../Header/Maze.hpp"
+//#include "../Header/Maze.hpp"
 
 // Constructor
 Agent::Agent(int row, int col)
@@ -45,16 +45,74 @@ void Agent::setStepWidth(int value) {
 
 // Methods
 void Agent::turnLeft() {
-    if (direction == NORTH) direction = WEST;
-    else direction = static_cast<Direction>(direction - 1);
+    switch (direction) {
+        case NORTH:
+            direction = WEST;
+            break;
+        case EAST:
+            direction = NORTH;
+            break;
+        case SOUTH:
+            direction = EAST;
+            break;
+        case WEST:
+            direction = SOUTH;
+            break;
+    }
 }
 
 void Agent::turnRight() {
-    if (direction == WEST) direction = NORTH;
-    else direction = static_cast<Direction>(direction + 1);
+    switch (direction) {
+        case NORTH:
+            direction = EAST;
+            break;
+        case EAST:
+            direction = SOUTH;
+            break;
+        case SOUTH:
+            direction = WEST;
+            break;
+        case WEST:
+            direction = NORTH;
+            break;
+    }
 }
 
-void Agent::move(const Maze &maze) {
+
+void Agent::setDirectionFromKey(char input) {
+    switch (input) {
+        case 'W':
+        case 'w':
+            if (direction != SOUTH) {
+                direction = NORTH;
+            }
+            break;
+        case 'A':
+        case 'a':
+            if (direction != EAST) {
+                direction = WEST;
+            }
+            break;
+        case 'S':
+        case 's':
+            if (direction != NORTH) {
+                direction = SOUTH;
+            }
+            break;
+        case 'D':
+        case 'd':
+            if (direction != WEST) {
+                direction = EAST;
+            }
+            break;
+        //default:
+            // Invalid input; do nothing or handle error
+            //break;
+    }
+}
+
+
+void Agent::move() {
     int newRow = position.first;
     int newCol = position.second;
 
@@ -74,31 +132,13 @@ void Agent::move(const Maze &maze) {
             break;
     }
 
-    // Check for walls and adjust position accordingly
-    while (newRow >= 0 && newRow < 11 && newCol >= 0 && newCol < 11 && maze.getElementAtPosition(newRow, newCol) != 1) {
-        // Adjust positions based on the agent's direction
-        switch (direction) {
-            case NORTH:
-                newRow--;
-                break;
-            case EAST:
-                newCol++;
-                break;
-            case SOUTH:
-                newRow++;
-                break;
-            case WEST:
-                newCol--;
-                break;
-        }
+    // Check if the new position is within bounds and not a wall (considering maze.getElementAtPosition())
+    if (newRow >= 0 && newRow < 11 && newCol >= 0 && newCol < 11) {
+        //if () {
+            position.first = newRow;
+            position.second = newCol;
+            // Update the agent's position in the maze using maze.updateAgentPosition(position);
+            //}
     }
-
-    // Update the agent's position if within bounds
-    if (newRow >= 0 && newRow < 11 && newCol >= 0 && newCol < 11 &&
-        maze.getElementAtPosition(newRow, newCol)) {
-        position.first = newRow;
-        position.second = newCol;
-        maze.updateAgentPosition(position);
+        // Handle any out-of-bounds scenario if necessary
     }
-    // Handle any out-of-bounds scenario if necessary
-}

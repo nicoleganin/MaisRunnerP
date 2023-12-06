@@ -9,7 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <curses.h>
-#include "Maze.hpp"
+//#include "Maze.hpp"
 
 using namespace std;
 
@@ -33,12 +33,12 @@ public:
     void setPosition(int row, int col);
     void setPerceptiveField(int value);
     void setStepWidth(int value);
-    void setDirectionFromKey(int key);
+    void setDirectionFromKey(char key);
 
 
     // Methods
     void turnLeft();
     void turnRight();
-    void move(const Maze &maze); // Declaration for move method
+    void move(); // Declaration for move method
 
 };

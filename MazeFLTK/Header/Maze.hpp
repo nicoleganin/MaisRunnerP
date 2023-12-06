@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <string>
-//#include "Agent.hpp"
+#include "Agent.hpp"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ public:
     Maze();
     vector<std::vector<int>> loadMaze(const string& filename);
     int getElementAtPosition(int row, int col) const;
-    void displayMaze();
+    void displayMaze(Agent& agent);
     void updateAgentPosition(const std::pair<int, int>& newPosition) const;
 
     

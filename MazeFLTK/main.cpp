@@ -11,6 +11,7 @@
 #include "Header/Maze.hpp"
 #include "Header/Agent.hpp"
 #include <curses.h>
+#define BOARD_DIM 11
 
 using namespace std;
 
@@ -26,28 +27,36 @@ int main() {
     
     // Initialize curses
     initscr();
-    keypad(stdscr, TRUE); // Enable keypad for arrow keys
-    noecho(); // Don't echo user input to the screen
-    curs_set(0); // Hide the cursor
+    //keypad(stdscr, TRUE); // Enable keypad for arrow keys
+    noecho();             // Disable echoing of input
+    curs_set(0);          // Hide cursor
 
-    
+     
     bool gameRunning = true;
     
-    while (gameRunning) {
-        myMaze.displayMaze(); // Display the maze
-        refresh();
-        int input = getch(); // Get the pressed key
-        agent.getPosition(); // Set agent's direction based on key input
-        agent.move(myMaze); // Move the agent based on the direction
+     
+     while (gameRunning) {
+         clear();
+                  
+         myMaze.displayMaze(agent); // Display the maze
+         printw("Enter a direction (W/A/S/D) to move the agent ('Q' to quit): \n");
 
-        // Redraw the maze after the agent's movement
-        clear(); // Clear the screen
-        myMaze.displayMaze(agent); // Display the maze with updated agent position
-        refresh(); // Refresh the screen
-    }
+         
+         refresh();
+         
+         char input;
+         cin >> input;
 
-    // End curses mode
-    endwin();
+         if (input == 'Q' || input == 'q') {
+             gameRunning = false;
+         } else {
+             agent.setDirectionFromKey(input); // Set agent's direction based on key input
+             agent.move(); // Move the agent based on the direction
+         }
+     }
 
-    return 0;
-}
+     // End curses mode
+     endwin();
+
+     return 0;
+ }

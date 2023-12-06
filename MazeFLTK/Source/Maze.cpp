@@ -61,18 +61,25 @@ void Maze::updateAgentPosition(const pair<int, int>& newPosition) const {
     
 }
     
-void Maze::displayMaze()  {
+void Maze::displayMaze(Agent &agent)  {
+    pair<int, int> agentPos = agent.getPosition();
+    
     for (size_t i = 0; i < maze.size(); ++i) {
-        for (int cell : maze[i]) {
-            if (cell == 2) {
-                if (i== agentPos.first && cell == agentPos.second) {
-                    //updateAgentPosition(agentPosition);
-                    cout << "A ";  // Display 'A' for the agent's position
-                }
-            } else {
-                cout << cell << " ";
+        for (size_t j = 0; j< maze[i].size(); ++j) {
+            
+            int cellValue = maze[i][j];
+            
+            // Calculate the coordinates for mvwprintw
+            int x = static_cast<int>(j); // Cast size_t to int
+            int y = static_cast<int>(i); // Cast size_t to int
+            
+            if (i == agentPos.first && j == agentPos.second) {
+                mvprintw(y, x, "A" );
+            }
+            else {
+                mvprintw(y, x, "%d ", cellValue);
             }
         }
         cout << "\n";
-        }
     }
+}
