@@ -1,0 +1,55 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "e9d8dc24682f40d67ffd458de0a160f283c6e90b07d25707212e0834e9604155"
+    }
+  ],
+  "containerPath" : "/Users/nicoleganin/Desktop/CSAI/Programming_with_C++/MazeFLTK/MazeFLTK.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx14.0",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "x86_64h",
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/nicoleganin/Desktop/CSAI/Programming_with_C++/MazeFLTK/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/nicoleganin/Desktop/CSAI/Programming_with_C++/MazeFLTK/Build/Products",
+      "derivedDataPath" : "/Users/nicoleganin/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/nicoleganin/Library/Developer/Xcode/DerivedData/MazeFLTK-hdlqwpzzktrsfbelcazprwoytykz/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/nicoleganin/Library/Developer/Xcode/DerivedData/MazeFLTK-hdlqwpzzktrsfbelcazprwoytykz/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/nicoleganin/Desktop/CSAI/Programming_with_C++/MazeFLTK/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
