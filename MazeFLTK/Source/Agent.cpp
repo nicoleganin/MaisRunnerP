@@ -8,8 +8,9 @@
 #include "../Header/Agent.hpp"
 
 // Constructor
+// Constructor
 Agent::Agent(int row, int col)
-: position(row, col), perceptiveField(1), stepWidth(1) {}
+: position(row, col), perceptiveField(1), stepWidth(1), endGame(0), stepsTaken(0) {}
 
 // Getters
 std::pair<int, int> Agent::getPosition() const {
@@ -28,15 +29,22 @@ int Agent::getStepWidth() const {
     return stepWidth;
 }
 
+int Agent::getEndGame() const {
+    return endGame;
+}
+
+int Agent::getStepsTaken() const {
+    return stepsTaken;
+}
 
 // Setters
 void Agent::setPosition(int row, int col) {
-        position.first = row;
-        position.second = col;
+    position.first = row;
+    position.second = col;
 }
 
 void Agent::setDirection(Direction newDirection) {
-    direction = newDirection; // Set direction from four possible values it can take
+    direction = newDirection;
 }
 
 void Agent::setPerceptiveField(int value) {
@@ -47,9 +55,20 @@ void Agent::setStepWidth(int value) {
     stepWidth = value;
 }
 
+void Agent::setEndGame(int value) {
+    endGame = value;
+}
+
+void Agent::setStepsTaken(int value) {
+    stepsTaken = value;
+}
+
+// Method to handle user input and set direction
 void Agent::setDirectionFromKey(char input) {
     // Get the current agent direction
     Direction currentDirection = getDirection();
+    // Get the score of agent
+    int steps = getStepsTaken();
 
     switch (input) {
         case 'W':
@@ -79,9 +98,12 @@ void Agent::setDirectionFromKey(char input) {
         default: // Invalid input; do nothing
             setDirection(currentDirection); // Remain direction if you pressed an opposite key
     }
+    
+    // Update score according to your move
+    setStepsTaken(steps + 1);
 }
 
-
+// Method to move the agent
 void Agent::move(int* pointerValue) {
     pair<int, int> agentPos = getPosition(); // Get agent coordinates on maze
     
@@ -140,13 +162,16 @@ void Agent::move(int* pointerValue) {
                     stepWidth -= 1; // Min. range of 1
                 }
                 break;
+            case 3: // Final position
+                setEndGame(1); // End game
+                break;
             default:
                 break;
         }
-
+        
         // Update the agent's position only if the move is valid
         setPosition(tempRow, tempCol);
-
+    
     } else {
         // Handle invalid move: Do not change position or direction
     }

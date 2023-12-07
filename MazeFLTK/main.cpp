@@ -32,24 +32,34 @@ int main() {
     // Gameplay starts
     bool gameRunning = true;
     
+
+    
     while (gameRunning) {
         clear();
         
+        int gameRun = agent.getEndGame();
+        int* gameRunPtr = &(gameRun); // Pointer to the endGame variable
+                
         // Display agent in maze
         myMaze.playMaze(agent); // Display the maze
+        printw("\n");
         printw("Enter a direction (W/A/S/D) to move the agent ('Q' to quit): \n");
+        printw("Score: %d\n", agent.getStepsTaken());
+        
         refresh();
         
         char input;
         cin >> input;
         
         // Press Q to quit the game
-        if (input == 'Q' || input == 'q') {
+        if (input == 'Q' || input == 'q' || *gameRunPtr == 1) {
             gameRunning = false;
         } else {
             // If game is running, receive input and change and update agent position in maze
             agent.setDirectionFromKey(input);
             myMaze.playMaze(agent);
+            
+
         }
     }
 
