@@ -15,13 +15,16 @@ using namespace std;
 class Maze {
 public:
     Maze();
+    // Load maze file
     vector<std::vector<int>> loadMaze(const string& filename);
-    int getElementAtPosition(int row, int col) const;
-    void displayMaze(Agent& agent);
-    void updateAgentPosition(const std::pair<int, int>& newPosition) const;
-
     
+    // Display agent in maze
+    void playMaze(Agent& agent);
+    // Display maze without agent
+    void displayMaze();
+
 private:
     std::vector<std::vector<int>> maze;
     std::pair<int, int> agentPosition;
+
 };

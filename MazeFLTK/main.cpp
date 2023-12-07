@@ -11,52 +11,50 @@
 #include "Header/Maze.hpp"
 #include "Header/Agent.hpp"
 #include <curses.h>
-#define BOARD_DIM 11
 
 using namespace std;
 
-
 int main() {
     
-    Agent agent (0,0);
+    // Initialize agent and maze
+    Agent agent(0, 0);
     Maze myMaze;
-
-    std::string filename = "/Users/nicoleganin/Desktop/CSAI/Programming_with_C++/MazeFLTK/MazeFLTK/MazeGrid.json";
-
+    
+    // Read string file
+    string filename = "/Users/nicoleganin/Desktop/CSAI/Programming_with_C++/MazeFLTK/MazeFLTK/MazeGrid.json";
     myMaze.loadMaze(filename); // Load the maze from the file into a vector
     
-    // Initialize curses
+    // Initialize gameplay
     initscr();
-    //keypad(stdscr, TRUE); // Enable keypad for arrow keys
     noecho();             // Disable echoing of input
     curs_set(0);          // Hide cursor
-
-     
+    
+    // Gameplay starts
     bool gameRunning = true;
     
-     
-     while (gameRunning) {
-         clear();
-                  
-         myMaze.displayMaze(agent); // Display the maze
-         printw("Enter a direction (W/A/S/D) to move the agent ('Q' to quit): \n");
+    while (gameRunning) {
+        clear();
+        
+        // Display agent in maze
+        myMaze.playMaze(agent); // Display the maze
+        printw("Enter a direction (W/A/S/D) to move the agent ('Q' to quit): \n");
+        refresh();
+        
+        char input;
+        cin >> input;
+        
+        // Press Q to quit the game
+        if (input == 'Q' || input == 'q') {
+            gameRunning = false;
+        } else {
+            // If game is running, receive input and change and update agent position in maze
+            agent.setDirectionFromKey(input);
+            myMaze.playMaze(agent);
+        }
+    }
 
-         
-         refresh();
-         
-         char input;
-         cin >> input;
+    // End gameplay mode
+    endwin();
 
-         if (input == 'Q' || input == 'q') {
-             gameRunning = false;
-         } else {
-             agent.setDirectionFromKey(input); // Set agent's direction based on key input
-             agent.move(); // Move the agent based on the direction
-         }
-     }
-
-     // End curses mode
-     endwin();
-
-     return 0;
- }
+    return 0;
+}

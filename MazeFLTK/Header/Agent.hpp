@@ -14,31 +14,35 @@
 using namespace std;
 
 class Agent {
-private:
-    pair<int, int> position;
-    int perceptiveField;
-    int stepWidth;
-    enum Direction {NORTH, EAST, SOUTH, WEST} direction;
 public:
     // Constructor
     Agent(int row, int col);
-    
+
     // Getters
-    pair<int, int> getPosition() const;
-    int getPerceptiveField() const;
-    int getStepWidth() const;
-    Direction getDirection() const;
+    std::pair<int, int> getPosition() const; // Get coordinates of agent position
+    enum Direction { NORTH, SOUTH, EAST, WEST }; // List of possible diretions agent is facing
 
+    int getPerceptiveField() const; // Get the range of cells agent can view
+    int getStepWidth() const; // Get amount of steps agent takes within one move
+    //int getCell(int row, int col) const;
+    Direction getDirection() const; // Get direction agent faces
+
+    
     // Setters
-    void setPosition(int row, int col);
-    void setPerceptiveField(int value);
-    void setStepWidth(int value);
-    void setDirectionFromKey(char key);
-
+    void setPosition(int row, int col); // Set coordinates of the agent position
+    void setDirection(Direction newDirection); // Set direction agent faces
+    void setPerceptiveField(int value); // Set range of blocks agent can view
+    void setStepWidth(int value); // Set amount of steps agent can take within one move
+    void setDirectionFromKey(char key); // Set direction agent is facing based on keybaord input
 
     // Methods
-    void turnLeft();
-    void turnRight();
-    void move(); // Declaration for move method
-
+    void move(int* pointerValue); // Move agent towards a direction based on direction. Needs a input value, this is the cell value it is positioned at
+    
+private:
+    std::pair<int, int> position;
+    std::pair<int, int> nextPosition;
+    int perceptiveField;
+    int stepWidth;
+    Direction direction;
+    
 };
